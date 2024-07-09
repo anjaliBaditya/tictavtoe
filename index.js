@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  //creating a gameboard variable to function once the start button is clicked
+  // Creating a game board variable to function once the start button is clicked
   const displayController = (() => {
     const renderMessages = (message) => {
       document.querySelector("#result-display").innerHTML = message;
@@ -36,14 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
       getGameboard,
     };
   })();
-  //creating a player factory
+  // Creating a player factory
   const createPlayer = (name, mark) => {
     return {
       name,
       mark,
     };
   };
-  // start Game
+  // Start Game
   const Game = (() => {
     let players = [];
     let currentPlayerIndex;
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gameOver = false;
       GameBoard.render();
     };
-    //handle click function
+    // Handle click function
     const handleClick = (event) => {
       if (gameOver) {
         return;
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       GameBoard.update(index, players[currentPlayerIndex].mark);
       if (
-        checkForwin(GameBoard.getGameboard(), players[currentPlayerIndex].name)
+        checkForWin(GameBoard.getGameboard(), players[currentPlayerIndex].name)
       ) {
         gameOver = true;
         displayController.renderMessages(
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
       } else if (checkForTie(GameBoard.getGameboard())) {
         gameOver = true;
-        displayController.renderMessages("its a tie!");
+        displayController.renderMessages("It's a tie!");
       }
 
       currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   })();
   // Add Check for win function
-  function checkForwin(board) {
+  function checkForWin(board, winnerName) {
     const winningCombinations = [
       [0, 1, 2],
       [3, 4, 5],
@@ -129,5 +129,4 @@ document.addEventListener("DOMContentLoaded", () => {
   startButton.addEventListener("click", () => {
     Game.start();
   });
-});      
-        
+});
